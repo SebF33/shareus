@@ -20,7 +20,7 @@ Proposer un espace de partage d’images en facilitant le dépôt des fichiers e
 
 
 ## :computer: Développement
-**Description technique :** (à décrire).
+**Description technique :** Upload pratique avec drag & drop et slider responsive.
 
 **Langages :** PHP (POO), JavaScript.
 
