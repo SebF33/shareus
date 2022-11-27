@@ -1,0 +1,62 @@
+body {
+  overflow: hidden;
+}
+
+.swiper-container {
+  cursor: grab;
+  max-width: 100%;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.swiper-container .swiper-pagination-bullet-active {
+  background-color: var(--color-bg) !important;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.swiper-container .swiper-pagination-bullet {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #333;
+  border-radius: 50% 45% 40% 50%/40% 50% 50% 45%;
+  background: transparent;
+  opacity: 1;
+}
+
+.swiper-container .swiper-pagination-bullet:focus,
+.swiper-container .swiper-pagination-bullet-active:focus {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.swiper-container .swiper-slide {
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  max-width: 100%;
+  width: 100%;
+  background-color: var(--color-bg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.swiper-container .swiper-slide .overlay {
+  text-align: center;
+}
+
+.swiper-container .swiper-slide .overlay h1 {
+  color: var(--color-bg);
+}
