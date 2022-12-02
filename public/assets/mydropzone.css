@@ -8,6 +8,12 @@
   margin-right: auto;
 }
 
+.dropzone .dz-message {
+  background: url(drop-mark.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .dropzone .dz-preview .dz-error-message {
   top: 144px;
 }
