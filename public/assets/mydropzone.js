@@ -29,7 +29,7 @@ new Dropzone("#uploadForm", {
   dictFallbackText: "Veuillez utiliser le formulaire de secours ci-dessous pour upload vos fichiers comme au bon vieux temps.",
   dictFileTooBig: "Le fichier est trop volumineux ({{filesize}}MiB). Taille de fichier maximale : {{maxFilesize}}MiB.",
   dictInvalidFileType: "Vous ne pouvez pas upload de fichiers de ce type.",
-  dictMaxFilesExceeded: "Seuls {{maxFiles}} sont autorisés.",
+  dictMaxFilesExceeded: "Seuls {{maxFiles}} fichiers max sont autorisés.",
   dictRemoveFile: "Retirer",
   dictResponseError: "Le serveur a répondu avec le code {{statusCode}}.",
 
