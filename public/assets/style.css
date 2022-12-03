@@ -40,6 +40,12 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+header {
+    position: relative;
+    z-index: 2;
+}
+
+
 .btn-primary {
     background-color: var(--color-blue);
     border-color: var(--color-blue);
