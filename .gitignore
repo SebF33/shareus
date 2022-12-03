@@ -1,4 +1,7 @@
 desktop.ini
 TO_DO_LIST.md
-/public/uploads
+
+/public/uploads/*
 /vendor
+
+!/**/.gitkeep
