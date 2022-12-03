@@ -136,7 +136,7 @@ $app->get('/swiper', function ($request, $response, $args) {
 $app->get('/download/{filename}', function ($request, $response, $args) {
 
   $directory = $this->get('upload_directory');
-  $file = $directory . DIRECTORY_SEPARATOR . $args['filename'];
+  $file = $directory . $args['filename'];
   $extension = pathinfo($file, PATHINFO_EXTENSION);
   $mimetype = getMimeType($extension);
 
