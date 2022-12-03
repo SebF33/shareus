@@ -2,7 +2,7 @@ Dropzone.autoDiscover = false;
 
 new Dropzone("#uploadForm", {
   clickable: ".dropzone",
-  url: "https://sebf33-shareus.herokuapp.com/",
+  url: "http://localhost:8888/",
   previewsContainer: "#previewsContainer",
   paramName: "file",
   accept: function (file, done) {
