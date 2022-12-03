@@ -30,7 +30,7 @@
       <!-- Swiper slides -->
       <?php
 
-      foreach (glob("$galleryDir{*.jpg,*.gif,*.png,*.tif,*.jpeg}", GLOB_BRACE) as $imagePath) {
+      foreach (glob("$galleryDir{*.jpg,*.jpeg,*.png,*.webp}", GLOB_BRACE) as $imagePath) {
         $fileName = substr($imagePath, strlen($galleryDir));
         $parts = explode('_', $fileName);
         $imageName = $parts[2];
