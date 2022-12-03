@@ -3,11 +3,13 @@ body {
 }
 
 .swiper-container {
-  cursor: grab;
+  position: absolute;
+  bottom: 0;
   max-width: 100%;
   width: 100%;
   min-height: 100vh;
   height: 100vh;
+  cursor: grab;
 }
 
 .swiper-container .swiper-pagination-bullet-active {
@@ -57,6 +59,8 @@ body {
   text-align: center;
 }
 
-.swiper-container .swiper-slide .overlay h1 {
+.swiper-container .swiper-slide .overlay h1,
+.swiper-container .swiper-slide .overlay h2,
+.swiper-container .swiper-slide .overlay h3 {
   color: var(--color-bg);
 }

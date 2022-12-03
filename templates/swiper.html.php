@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="assets/lib/bootswatch/sketchy/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/lib/swiper-bundle.min.css" />
-  
+
   <link rel="stylesheet" href="assets/myswiper.css" type="text/css" media="screen">
   <link rel="stylesheet" href="assets/style.css" type="text/css" media="screen">
 
@@ -21,7 +21,7 @@
 
 <body>
 
-  <?php include "nav.html"; ?>
+  <?php include "../components/header.html"; ?>
 
   <!-- Swiper container -->
   <div class="swiper-container">
@@ -29,16 +29,23 @@
     <div class="swiper-wrapper">
       <!-- Swiper slides -->
       <?php
-      $galleryDir = 'uploads/';
+
       foreach (glob("$galleryDir{*.jpg,*.gif,*.png,*.tif,*.jpeg}", GLOB_BRACE) as $imagePath) {
-        $imageName = substr($imagePath, 8);
+        $fileName = substr($imagePath, strlen($galleryDir));
+        $parts = explode('_', $fileName);
+        $imageName = $parts[2];
+        $author = $parts[0];
+        $date = date("d-m-Y", strtotime($parts[1]));
         echo "<div class=\"swiper-slide\" style=\"background-image:url($imagePath)\">";
         echo "<div class=\"overlay\">";
-        echo "<h1 class=\"d-flex justify-content-center\">$imageName</h1>";
-        echo "<a class=\"btn btn-secondary\" href=\"/download/$imageName\" role=\"button\">Télécharger</a>";
+        echo "<h1 class=\"d-flex justify-content-center\">Image : $imageName</h1>";
+        echo "<h2 class=\"d-flex justify-content-center\">Utilisateur : $author</h2>";
+        echo "<h3 class=\"d-flex justify-content-center\">Date : $date</h3>";
+        echo "<a class=\"btn btn-secondary\" href=\"/download/$fileName\" role=\"button\">Télécharger</a>";
         echo "</div>";
         echo "</div>";
       }
+
       ?>
     </div>
     <!-- Swiper pagination -->
