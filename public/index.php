@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 
 // Dossier d'uploads
-$uploadDir = DIRECTORY_SEPARATOR . 'uploads';
+$uploadDir = '/uploads';
 $containerBuilder = new ContainerBuilder();
 $container = $containerBuilder->build();
 $container->set('upload_directory', __DIR__ . $uploadDir);
