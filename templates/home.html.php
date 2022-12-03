@@ -27,7 +27,7 @@
 
 <body>
 
-  <?php include "nav.html"; ?>
+  <?php include "../components/header.html"; ?>
 
   <div class="container mt-5">
     <h1 class="d-flex justify-content-center text-center">Partagez-nous !</h1>
@@ -46,13 +46,13 @@
       <div id="previewsContainer" class="dropzone mt-5">
         <div class="dz-default dz-message">
           <button class="dz-button" type="button">
-            <strong class="fw-bold">Cliquez ou déposez vos fichiers ici.</strong>
+            <p class="fw-bold">Cliquez ou déposez vos fichiers ici.</p>
             <br>
-            <span>(Fichiers acceptés : .jpg, .png)</span>
+            <span>(Fichiers acceptés : .jpg, .png, .webp)</span>
             <br>
             <span>(Poids max par fichier : 1 Mo)</span>
             <br>
-            <span>(Caractères max du nom de fichier : 20)</span>
+            <span>(Caractères max du nom de fichier : 30)</span>
           </button>
         </div>
       </div>

@@ -12,9 +12,10 @@ require __DIR__ . '/../vendor/autoload.php';
 
 
 // Dossier d'uploads
+$uploadDir = '/uploads';
 $containerBuilder = new ContainerBuilder();
 $container = $containerBuilder->build();
-$container->set('upload_directory', __DIR__ . '/uploads');
+$container->set('upload_directory', __DIR__ . $uploadDir);
 AppFactory::setContainer($container);
 
 
@@ -58,13 +59,16 @@ $app->post('/', function (ServerRequestInterface $request, ResponseInterface $re
 
     // Upload multiple
     $uploadedFiles = $request->getUploadedFiles();
+
     foreach ($uploadedFiles['file'] as $uploadedFile) {
       // Gestion des erreurs de la super globale $_FILES
       // https://www.php.net/manual/en/features.file-upload.errors.php
+
       // Erreur 1 : La taille du fichier téléchargé excède la valeur de upload_max_filesize, configurée dans le php.ini
       // Erreur 2 : La taille du fichier téléchargé excède la valeur de MAX_FILE_SIZE, qui a été spécifiée dans le formulaire
+      // Poids maxi : 1Mo => 1024*1024
       if ($uploadedFile->getError() === UPLOAD_ERR_INI_SIZE && $uploadedFile->getError() === UPLOAD_ERR_FORM_SIZE) :
-        echo 'Fichier trop volumineux (1Mo max).'; // Poids maxi : 1Mo => 1024*1024
+        echo 'Fichier trop volumineux (1Mo max).';
         return $response->withStatus(400);
       // Erreur 3 : Le fichier n'a été que partiellement téléversé
       // Erreur 6 : Un dossier temporaire est manquant
@@ -80,8 +84,19 @@ $app->post('/', function (ServerRequestInterface $request, ResponseInterface $re
           return $response->withStatus(400);
         else :
           // Re-vérification de la taille du fichier côté serveur
+          // Poids maxi : 1Mo => 1024*1024
           if ($uploadedFile->getSize() > 1048576) {
-            echo 'Fichier trop volumineux (1Mo max).'; // Poids maxi : 1Mo => 1024*1024
+            echo 'Fichier trop volumineux (1Mo max).';
+            return $response->withStatus(400);
+          }
+          // Re-vérification du type du fichier côté serveur
+          // .jpg, .png et .webp
+          elseif (
+            $uploadedFile->getClientMediaType() != 'image/jpeg'
+            and $uploadedFile->getClientMediaType() != 'image/png'
+            and $uploadedFile->getClientMediaType() != 'image/webp'
+          ) {
+            echo 'Le fichier n\'est pas une image valide.';
             return $response->withStatus(400);
           }
           // Récupération et stockage du fichier sur le serveur
@@ -109,18 +124,27 @@ $app->post('/', function (ServerRequestInterface $request, ResponseInterface $re
 
 // Swiper
 $app->get('/swiper', function ($request, $response, $args) {
+
+  $galleryDir = 'uploads/';
+
   $renderer = new PhpRenderer(__DIR__ . '/../templates/');
-  return $renderer->render($response, 'swiper.html.php', $args);
+  return $renderer->render($response, 'swiper.html.php', ["galleryDir" => $galleryDir]);
 })->setName('swiper');
 
 
 // Download personnalisé
 $app->get('/download/{filename}', function ($request, $response, $args) {
 
-  $file = '/uploads/' . $args['filename'];
+  $directory = $this->get('upload_directory');
+  $file = $directory . $args['filename'];
+  $extension = pathinfo($file, PATHINFO_EXTENSION);
+  $mimetype = getMimeType($extension);
+
+  $fh = fopen($file, 'rb');
+  $stream = new \Slim\Psr7\Stream($fh);
 
   return $response->withHeader('Content-Type', 'application/force-download')
-    ->withHeader('Content-Type', FILEINFO_MIME_TYPE)
+    ->withHeader('Content-Type', $mimetype)
     ->withHeader('Content-Type', 'application/download')
     ->withHeader('Content-Description', 'File Transfer')
     ->withHeader('Content-Transfer-Encoding', 'binary')
@@ -128,7 +152,8 @@ $app->get('/download/{filename}', function ($request, $response, $args) {
     ->withHeader('Expires', '0')
     ->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
     ->withHeader('Pragma', 'public')
-    ->withBody((new \Slim\Psr7\Stream(fopen($file, 'rb'))));
+    ->withHeader('Content-Length', filesize($file))
+    ->withBody($stream);
 });
 
 
@@ -156,6 +181,74 @@ function moveUploadedFile(string $directory, string $username, UploadedFileInter
   $movedFile = $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
 
   return $movedFile;
+}
+
+
+function getMimeType($ext)
+{
+  $mime_types = array(
+
+    'txt' => 'text/plain',
+    'htm' => 'text/html',
+    'html' => 'text/html',
+    'php' => 'text/html',
+    'css' => 'text/css',
+    'js' => 'application/javascript',
+    'json' => 'application/json',
+    'xml' => 'application/xml',
+    'swf' => 'application/x-shockwave-flash',
+    'flv' => 'video/x-flv',
+
+    // images
+    'png' => 'image/png',
+    'jpe' => 'image/jpeg',
+    'jpeg' => 'image/jpeg',
+    'jpg' => 'image/jpeg',
+    'gif' => 'image/gif',
+    'bmp' => 'image/bmp',
+    'ico' => 'image/vnd.microsoft.icon',
+    'tiff' => 'image/tiff',
+    'tif' => 'image/tiff',
+    'svg' => 'image/svg+xml',
+    'svgz' => 'image/svg+xml',
+    'webp' => 'image/webp',
+
+    // archives
+    'zip' => 'application/zip',
+    'rar' => 'application/x-rar-compressed',
+    'exe' => 'application/x-msdownload',
+    'msi' => 'application/x-msdownload',
+    'cab' => 'application/vnd.ms-cab-compressed',
+
+    // audio/video
+    'mp3' => 'audio/mpeg',
+    'qt' => 'video/quicktime',
+    'mov' => 'video/quicktime',
+
+    // adobe
+    'pdf' => 'application/pdf',
+    'psd' => 'image/vnd.adobe.photoshop',
+    'ai' => 'application/postscript',
+    'eps' => 'application/postscript',
+    'ps' => 'application/postscript',
+
+    // ms office
+    'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'doc' => 'application/msword',
+    'dot' => 'application/msword',
+    'dotx' => 'application/msword',
+    'rtf' => 'application/rtf',
+    'xls' => 'application/vnd.ms-excel',
+    'ppt' => 'application/vnd.ms-powerpoint',
+
+    // open office
+    'odt' => 'application/vnd.oasis.opendocument.text',
+    'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+  );
+
+  if (array_key_exists($ext, $mime_types)) {
+    return $mime_types[$ext];
+  }
 }
 
 

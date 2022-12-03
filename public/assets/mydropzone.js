@@ -6,14 +6,14 @@ new Dropzone("#uploadForm", {
   previewsContainer: "#previewsContainer",
   paramName: "file",
   accept: function (file, done) {
-    if (file.name.length > 20) {
-      done("Il y a plus de 20 caractères dans le nom de fichier.");
+    if (file.name.length > 30) {
+      done("Il y a plus de 30 caractères dans le nom de fichier.");
     } else {
       done();
     }
   },
 
-  acceptedFiles: ".jpeg,.jpg,.png",
+  acceptedFiles: ".jpeg,.jpg,.png,.webp",
   addRemoveLinks: true,
   autoProcessQueue: false,
   maxFiles: 10,
