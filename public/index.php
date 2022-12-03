@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 
 // Dossier d'uploads
-$uploadDir = '/uploads';
+$uploadDir = DIRECTORY_SEPARATOR . 'uploads';
 $containerBuilder = new ContainerBuilder();
 $container = $containerBuilder->build();
 $container->set('upload_directory', __DIR__ . $uploadDir);
@@ -136,7 +136,7 @@ $app->get('/swiper', function ($request, $response, $args) {
 $app->get('/download/{filename}', function ($request, $response, $args) {
 
   $directory = $this->get('upload_directory');
-  $file = $directory . $args['filename'];
+  $file = $directory . DIRECTORY_SEPARATOR . $args['filename'];
   $extension = pathinfo($file, PATHINFO_EXTENSION);
   $mimetype = getMimeType($extension);
 
