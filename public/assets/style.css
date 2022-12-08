@@ -33,6 +33,7 @@
 
 body {
     background: var(--color-bg);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAMAAADXEh96AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF8/Pz+vr6pk6ljwAAABlJREFUeNpiYGBgYGRkxEoyQNgMEBGAAAMAAaQAE1fV18sAAAAASUVORK5CYII=');
     height: 100%;
     line-height: 1.4rem;
     font-size: 20px;
