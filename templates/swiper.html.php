@@ -4,11 +4,13 @@
 <html lang="fr">
 
 <head>
-  <title>Swiper</title>
+  <title>Slides</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="Swiper" content="Swiper">
+
+  <link data-vue-tag="ssr" rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
 
   <link rel="stylesheet" href="assets/lib/bootswatch/sketchy/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/lib/swiper-bundle.min.css" />
