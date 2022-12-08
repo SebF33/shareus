@@ -12,9 +12,7 @@ Proposer un espace de partage d’images en facilitant le dépôt des fichiers e
 
 
 ## :link: Liens
-:earth_africa: **Site web :** 
-
-:clapper: **Démo :** https://
+:earth_africa: **Site web :** https://sebf33-shareus.herokuapp.com
 
 :octocat: **GitHub :** https://github.com/SebF33/shareus
 
@@ -24,7 +22,7 @@ Proposer un espace de partage d’images en facilitant le dépôt des fichiers e
 
 **Langages :** PHP (POO), JavaScript.
 
-[![Slim](/.github/Slim.png)](https://www.slimframework.com) [![Dropzone](/.github/Dropzone.png)](https://www.dropzone.dev) [![Notiflix](/.github/Notiflix.png)](https://notiflix.github.io) [![Swiper](/.github/Swiper.png)](https://swiperjs.com) [![Bootswatch](/.github/Bootswatch.png)](https://bootswatch.com) 
+[![Slim](/.github/Slim.png)](https://www.slimframework.com) [![Dropzone](/.github/Dropzone.png)](https://www.dropzone.dev) [![Notiflix](/.github/Notiflix.png)](https://notiflix.github.io) [![Swiper](/.github/Swiper.png)](https://swiperjs.com) [![Bootswatch](/.github/Bootswatch.png)](https://bootswatch.com) [![Heroku](/.github/Heroku.png)](https://www.heroku.com)
 
 :toolbox: **Technologies :**
 - [Slim 4](https://www.slimframework.com/docs/v4)
@@ -32,12 +30,30 @@ Proposer un espace de partage d’images en facilitant le dépôt des fichiers e
 - [Notiflix](https://notiflix.github.io/documentation)
 - [Swiper](https://swiperjs.com/get-started)
 - [Bootswatch](https://bootswatch.com/sketchy)
+- [Heroku](https://devcenter.heroku.com/articles/getting-started-with-php)
 
 
 ### ![Slim_tiny](/.github/Slim_tiny.png) Slim
 Démarrer le projet :
 `cd public`
 `php -S localhost:8888`
+
+
+### ![Heroku_tiny](/.github/Heroku_tiny.png) Heroku
+Créer une application :
+`heroku create sebf33-shareus`
+
+Se connecter au dépôt distant :
+`heroku git:remote -a sebf33-shareus`
+
+Déployer :
+`git push heroku master`
+
+Ouvrir dans le navigateur :
+`heroku open`
+
+Voir les logs :
+`heroku logs --tail`
 
 
 ![avatar](/.github/avatar.png)
