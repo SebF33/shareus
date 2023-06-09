@@ -21,7 +21,6 @@
 
   <script src="assets/lib/bootswatch/sketchy/bootstrap.min.js"></script>
   <script src="assets/lib/dropzone.min.js"></script>
-  <script src="assets/lib/jquery-3.6.0.min.js"></script>
   <script src="assets/lib/notiflix-3.2.5.mod.js"></script>
 </head>
 

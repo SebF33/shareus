@@ -34,7 +34,7 @@ new Dropzone("#uploadForm", {
   dictResponseError: "Le serveur a répondu avec le code {{statusCode}}.",
 
   init() {
-    var myDropzone = this;
+    let myDropzone = this;
 
     this.element.querySelector("button[name=uploadBtn]").addEventListener("click", function (e) {
       e.preventDefault();
@@ -48,11 +48,12 @@ new Dropzone("#uploadForm", {
     });
 
     myDropzone.on("error", function (file, responseText) {
-      $(file.previewElement).find('.dz-error-message').text(responseText);
+      let dzErrorMessage = file.previewElement.querySelector('.dz-error-message');
+      dzErrorMessage.textContent = responseText;
     });
 
     myDropzone.on("errormultiple", function (file) {
-      var errorMsg = 'Problème rencontré avec le fichier ' + file[0].name + ' 😒';
+      let errorMsg = 'Problème rencontré avec le fichier ' + file[0].name + ' 😒';
       Notiflix.Notify.failure(
         errorMsg, {
           className: 'alert alert-dismissible alert-danger',
@@ -63,12 +64,13 @@ new Dropzone("#uploadForm", {
     });
 
     myDropzone.on("success", function (file) {
-      var msg = 'Ce fichier a été envoyé avec succès.';
-      $(file.previewElement).find('.dz-error-message').text(msg);
+      let msg = 'Ce fichier a été envoyé avec succès.';
+      let dzErrorMessage = file.previewElement.querySelector('.dz-error-message');
+      dzErrorMessage.textContent = msg;
     });
 
     myDropzone.on("successmultiple", function () {
-      var successTitle = 'Fichier(s) transmis avec succès ! 😃';
+      let successTitle = 'Fichier(s) transmis avec succès ! 😃';
       Notiflix.Notify.success(
         successTitle, {
           className: 'alert alert-dismissible alert-success',
