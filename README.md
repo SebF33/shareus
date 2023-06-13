@@ -22,14 +22,15 @@ Proposer un espace de partage d’images en facilitant le dépôt des fichiers e
 
 **Langages :** PHP (POO), JavaScript.
 
-[![Slim](/.github/Slim.png)](https://www.slimframework.com) [![Dropzone](/.github/Dropzone.png)](https://www.dropzone.dev) [![Notiflix](/.github/Notiflix.png)](https://notiflix.github.io) [![Swiper](/.github/Swiper.png)](https://swiperjs.com) [![Bootswatch](/.github/Bootswatch.png)](https://bootswatch.com) [![Heroku](/.github/Heroku.png)](https://www.heroku.com)
+[![Slim](/.github/Slim.png)](https://www.slimframework.com) [![Bootswatch](/.github/Bootswatch.png)](https://bootswatch.com) [![UIkit](/.github/UIkit.png)](https://getuikit.com) [![Dropzone](/.github/Dropzone.png)](https://www.dropzone.dev) [![Notiflix](/.github/Notiflix.png)](https://notiflix.github.io) [![Swiper](/.github/Swiper.png)](https://swiperjs.com) [![Heroku](/.github/Heroku.png)](https://www.heroku.com)
 
 :toolbox: **Technologies :**
 - [Slim 4](https://www.slimframework.com/docs/v4)
+- [Bootswatch](https://bootswatch.com/sketchy)
+- [UIkit](https://getuikit.com/docs/introduction)
 - [Dropzone](https://docs.dropzone.dev)
 - [Notiflix](https://notiflix.github.io/documentation)
 - [Swiper](https://swiperjs.com/get-started)
-- [Bootswatch](https://bootswatch.com/sketchy)
 - [Heroku](https://devcenter.heroku.com/articles/getting-started-with-php)
 
 
