@@ -10,19 +10,44 @@ return function (App $app) {
 
     // Page d'accueil
     $app->get('/', function ($request, $response, $args) {
+
+        // CSRF
+        $csrf = $this->get('csrf');
+        $nameKey = $csrf->getTokenNameKey();
+        $valueKey = $csrf->getTokenValueKey();
+        $name = $request->getAttribute($nameKey);
+        $value = $request->getAttribute($valueKey);
+
         $renderer = new PhpRenderer(__DIR__ . '/../templates/');
+        $args['nameKey'] = $nameKey;
+        $args['valueKey'] = $valueKey;
+        $args['name'] = $name;
+        $args['value'] = $value;
+
         return $renderer->render($response, 'home.html.php', $args);
-    })->setName('accueil');
+    })->setName('home');
 
 
-    // Swiper
-    $app->get('/swiper', function ($request, $response, $args) {
+    // Page du slideshow
+    $app->get('/slideshow', function ($request, $response, $args) {
 
         $galleryDir = 'uploads/';
 
         $renderer = new PhpRenderer(__DIR__ . '/../templates/');
-        return $renderer->render($response, 'swiper.html.php', ["galleryDir" => $galleryDir]);
-    })->setName('swiper');
+
+        return $renderer->render($response, 'slideshow.html.php', ["galleryDir" => $galleryDir]);
+    })->setName('slideshow');
+
+
+    // Page des vignettes
+    $app->get('/thumbnails', function ($request, $response, $args) {
+
+        $galleryDir = 'uploads/';
+
+        $renderer = new PhpRenderer(__DIR__ . '/../templates/');
+
+        return $renderer->render($response, 'thumbnails.html.php', ["galleryDir" => $galleryDir]);
+    })->setName('thumbnails');
 
 
     // Download personnalisé
@@ -135,6 +160,7 @@ return function (App $app) {
                     endif;
                 endif;
             }
+
             return $response->withStatus(200);
         }
     });

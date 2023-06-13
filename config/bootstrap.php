@@ -2,8 +2,11 @@
 
 use DI\ContainerBuilder;
 use Slim\App;
+use Slim\Csrf\Guard;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
+session_start();
 
 
 $containerBuilder = new ContainerBuilder();
@@ -20,6 +23,13 @@ $container->set('upload_directory', __DIR__ . $uploadDir);
 
 // Crée une instance de l'application Slim
 $app = $container->get(App::class);
+
+// Protection CSRF
+$responseFactory = $app->getResponseFactory();
+$container->set('csrf', function () use ($responseFactory) {
+  return new Guard($responseFactory);
+});
+$app->add('csrf');
 
 // Enregistre les routes
 (require __DIR__ . '/routes.php')($app);

@@ -36,10 +36,16 @@ new Dropzone("#uploadForm", {
   init() {
     let myDropzone = this;
 
-    this.element.querySelector("button[name=uploadBtn]").addEventListener("click", function (e) {
+    myDropzone.element.querySelector("button[name=uploadBtn]").addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
       myDropzone.processQueue();
+    });
+
+    // CSRF
+    myDropzone.on("sending", function (file, xhr, formData) {
+      let csrfToken = myDropzone.element.querySelector('input[name="csrf_value"]').getAttribute('content');
+      xhr.setRequestHeader("X-CSRF-Token", csrfToken);
     });
 
     Notiflix.Notify.init({
