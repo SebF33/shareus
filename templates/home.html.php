@@ -29,6 +29,7 @@
   <?php include "../components/header.html"; ?>
 
   <div class="container mt-5">
+
     <h1 class="d-flex justify-content-center text-center">Partagez-nous !</h1>
     <h2 class="d-flex justify-content-center text-center">Montrez vos plus belles images : illustrations, dessins, croquis, ...</h2>
 
@@ -38,7 +39,11 @@
         <input type="text" name="username" class="form-control mt-1" placeholder="Saisissez 10 caractères max..." required="required">
       </div>
       <div class="demo-form-row text-center mt-4">
-        <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- Poids maxi : 1Mo => 1024*1024 -->
+        <!-- Poids maxi : 1Mo => 1024*1024 -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
+        <!-- CSRF -->
+        <input type="hidden" name="<?= $nameKey ?>" value="<?= $name ?>">
+        <input type="hidden" name="<?= $valueKey ?>" value="<?= $value ?>">
       </div>
 
       <!-- Zone d'aperçu des fichiers glissés -->
@@ -47,11 +52,11 @@
           <button class="dz-button" type="button">
             <p class="fw-bold">Cliquez ou déposez vos fichiers ici.</p>
             <br>
-            <span>(Fichiers acceptés : .jpg, .png, .webp)</span>
+            <span>( Fichiers acceptés : .jpg, .png, .webp )</span>
             <br>
-            <span>(Poids max par fichier : 1 Mo)</span>
+            <span>( Poids max par fichier : 1 Mo )</span>
             <br>
-            <span>(Caractères max du nom de fichier : 30)</span>
+            <span>( 30 caractères max pour le nom de fichier )</span>
           </button>
         </div>
       </div>
@@ -61,9 +66,9 @@
       </div>
     </form>
 
-    <script src="assets/mydropzone.js"></script>
   </div>
 
+  <script src="assets/mydropzone.js"></script>
 </body>
 
 </html>
