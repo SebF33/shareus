@@ -33,18 +33,27 @@
       <!-- Swiper slides -->
       <?php
 
-      foreach (glob("$galleryDir{*.jpg,*.jpeg,*.png,*.webp}", GLOB_BRACE) as $imagePath) {
-        $fileName = substr($imagePath, strlen($galleryDir));
-        $parts = explode('_', $fileName);
-        $imageName = $parts[2];
-        $author = $parts[0];
-        $date = date("d-m-Y", strtotime($parts[1]));
-        echo "<div class=\"swiper-slide\" style=\"background-image:url($imagePath)\">";
+      $glob = glob("$galleryDir{*.jpg,*.jpeg,*.png,*.webp}", GLOB_BRACE);
+      $imagecount = count($glob);
+      if ($imagecount > 0) {
+        foreach ($glob as $imagePath) {
+          $fileName = substr($imagePath, strlen($galleryDir));
+          $parts = explode('_', $fileName);
+          $imageName = $parts[2];
+          $author = $parts[0];
+          $date = date("d-m-Y", strtotime($parts[1]));
+          echo "<div class=\"swiper-slide\" style=\"background-image:url($imagePath)\">";
+          echo "<div class=\"overlay\">";
+          echo "<h1 class=\"d-flex justify-content-center\">Image : $imageName</h1>";
+          echo "<h2 class=\"d-flex justify-content-center\">Utilisateur : $author</h2>";
+          echo "<h3 class=\"d-flex justify-content-center\">Date : $date</h3>";
+          echo "<a class=\"btn btn-secondary\" href=\"/download/$fileName\" role=\"button\">Télécharger</a>";
+          echo "</div>";
+          echo "</div>";
+        }
+      } else {
+        echo "<div class=\"swiper-slide\" style=\"background-image:url($placeholdersDir/placeholder_1.jpg)\">";
         echo "<div class=\"overlay\">";
-        echo "<h1 class=\"d-flex justify-content-center\">Image : $imageName</h1>";
-        echo "<h2 class=\"d-flex justify-content-center\">Utilisateur : $author</h2>";
-        echo "<h3 class=\"d-flex justify-content-center\">Date : $date</h3>";
-        echo "<a class=\"btn btn-secondary\" href=\"/download/$fileName\" role=\"button\">Télécharger</a>";
         echo "</div>";
         echo "</div>";
       }

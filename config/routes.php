@@ -32,10 +32,11 @@ return function (App $app) {
     $app->get('/slideshow', function ($request, $response, $args) {
 
         $galleryDir = 'uploads/';
+        $placeholdersDir = 'placeholders/';
 
         $renderer = new PhpRenderer(__DIR__ . '/../templates/');
 
-        return $renderer->render($response, 'slideshow.html.php', ["galleryDir" => $galleryDir]);
+        return $renderer->render($response, 'slideshow.html.php', ["galleryDir" => $galleryDir, "placeholdersDir" => $placeholdersDir]);
     })->setName('slideshow');
 
 
@@ -43,10 +44,11 @@ return function (App $app) {
     $app->get('/thumbnails', function ($request, $response, $args) {
 
         $galleryDir = 'uploads/';
+        $placeholdersDir = 'placeholders/';
 
         $renderer = new PhpRenderer(__DIR__ . '/../templates/');
 
-        return $renderer->render($response, 'thumbnails.html.php', ["galleryDir" => $galleryDir]);
+        return $renderer->render($response, 'thumbnails.html.php', ["galleryDir" => $galleryDir, "placeholdersDir" => $placeholdersDir]);
     })->setName('thumbnails');
 
 

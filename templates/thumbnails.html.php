@@ -39,14 +39,22 @@
 
           <?php
 
-          foreach (glob("$galleryDir{*.jpg,*.jpeg,*.png,*.webp}", GLOB_BRACE) as $imagePath) {
-            $fileName = substr($imagePath, strlen($galleryDir));
-            $parts = explode('_', $fileName);
-            $imageName = $parts[2];
-            $author = $parts[0];
-            $date = date("d-m-Y", strtotime($parts[1]));
-            echo "<a href=\"$imagePath\">\n";
-            echo "<img style=\"padding:7px\" class=\"uk-card uk-card-default uk-card-hover uk-card-body\" src=\"$imagePath\">";
+          $glob = glob("$galleryDir{*.jpg,*.jpeg,*.png,*.webp}", GLOB_BRACE);
+          $imagecount = count($glob);
+          if ($imagecount > 0) {
+            foreach ($glob as $imagePath) {
+              $fileName = substr($imagePath, strlen($galleryDir));
+              $parts = explode('_', $fileName);
+              $imageName = $parts[2];
+              $author = $parts[0];
+              $date = date("d-m-Y", strtotime($parts[1]));
+              echo "<a href=\"$imagePath\">\n";
+              echo "<img style=\"padding:7px\" class=\"uk-card uk-card-default uk-card-hover uk-card-body\" src=\"$imagePath\" alt=\"$imageName\">";
+              echo "</a>";
+            }
+          } else {
+            echo "<a href=\"$placeholdersDir/placeholder_1.jpg\">\n";
+            echo "<img style=\"padding:7px\" class=\"uk-card uk-card-default uk-card-hover uk-card-body\" src=\"$placeholdersDir/placeholder_1.jpg\" alt=\"placeholder_1\">";
             echo "</a>";
           }
 
